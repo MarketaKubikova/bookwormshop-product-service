@@ -1,10 +1,10 @@
-package com.bookwormshop.product.service;
+package com.bookwormshop.productservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BookwormshopProductServiceApplicationTests {
+class BookwormshopBookServiceApplicationTests {
 
 	@Test
 	void contextLoads() {
