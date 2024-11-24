@@ -1,6 +1,8 @@
 package com.bookwormshop.productservice.service;
 
+import com.bookwormshop.productservice.mapper.BookMapper;
 import com.bookwormshop.productservice.model.Book;
+import com.bookwormshop.productservice.model.BookDTO;
 import com.bookwormshop.productservice.repository.BookRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,24 +15,28 @@ import java.util.List;
 @Slf4j
 public class BookService {
     private final BookRepository bookRepository;
+    private final BookMapper bookMapper;
 
-    public List<Book> getAllBooks() {
+    public List<BookDTO> getAllBooks() {
         log.info("Returning all books from database.");
-        return bookRepository.findAll();
+        return bookRepository.findAll().stream()
+                .map(bookMapper::toDTO)
+                .toList();
     }
 
-    public Book getBookById(Long id) {
+    public BookDTO getBookById(Long id) {
         return bookRepository.findById(id)
+                .map(bookMapper::toDTO)
                 .orElseThrow(() -> {
                     log.error("Book with id '{}' not found.", id);
-                    throw new IllegalArgumentException("Book not found in database.");
+                    throw new RuntimeException("Book not found in database.");
                 });
     }
 
-    public Book saveBook(Book book){
-        Book savedBook = bookRepository.save(book);
+    public BookDTO saveBook(BookDTO bookDTO){
+        Book savedBook = bookRepository.save(bookMapper.toDomain(bookDTO));
         log.info("Book '{}' was successfully saved with id '{}'.", savedBook.getName(), savedBook.getId());
-        return savedBook;
+        return bookMapper.toDTO(savedBook);
     }
 
     public void deleteBook(Long id) {
