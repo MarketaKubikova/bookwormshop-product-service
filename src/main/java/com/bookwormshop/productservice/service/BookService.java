@@ -1,5 +1,6 @@
 package com.bookwormshop.productservice.service;
 
+import com.bookwormshop.productservice.exception.ProductNotFoundException;
 import com.bookwormshop.productservice.mapper.BookMapper;
 import com.bookwormshop.productservice.model.Book;
 import com.bookwormshop.productservice.model.BookDTO;
@@ -29,7 +30,7 @@ public class BookService {
                 .map(bookMapper::toDTO)
                 .orElseThrow(() -> {
                     log.error("Book with id '{}' not found.", id);
-                    throw new RuntimeException("Book not found in database.");
+                    throw new ProductNotFoundException("Book with id " + id + " not found.");
                 });
     }
 

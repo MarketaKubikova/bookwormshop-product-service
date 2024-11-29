@@ -1,5 +1,6 @@
 package com.bookwormshop.productservice.service;
 
+import com.bookwormshop.productservice.exception.ProductNotFoundException;
 import com.bookwormshop.productservice.mapper.BookMapper;
 import com.bookwormshop.productservice.model.Book;
 import com.bookwormshop.productservice.model.BookDTO;
@@ -57,7 +58,7 @@ class BookServiceTest {
     void getBookById_nonExistingId_shouldThrowException() {
         when(bookRepository.findById(666L)).thenReturn(Optional.empty());
 
-        assertThrows(RuntimeException.class, () -> bookService.getBookById(666L));
+        assertThrows(ProductNotFoundException.class, () -> bookService.getBookById(666L));
     }
 
     @Test
