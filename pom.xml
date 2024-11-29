@@ -30,6 +30,7 @@
 		<java.version>21</java.version>
 		<org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<sonar.organization>your-organization-key</sonar.organization>
 	</properties>
 	<dependencies>
 		<dependency>
