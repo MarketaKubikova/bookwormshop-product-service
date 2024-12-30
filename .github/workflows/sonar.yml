@@ -34,8 +34,4 @@ jobs:
       - name: SonarCloud Scan
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn sonar:sonar \
-          -Dsonar.projectKey=bookwormshop-product-service \
-          -Dsonar.organization=marketakubikova \
-          -Dsonar.host.url=https://sonarcloud.io \
-          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+        run: mvn sonar:sonar -Dsonar.projectKey=com:bookwormshop-product-service -Dsonar.organization=marketakubikova -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
