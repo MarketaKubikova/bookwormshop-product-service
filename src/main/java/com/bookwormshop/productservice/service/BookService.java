@@ -30,7 +30,7 @@ public class BookService {
                 .map(bookMapper::toDTO)
                 .orElseThrow(() -> {
                     log.error("Book with id '{}' not found.", id);
-                    throw new ProductNotFoundException("Book with id " + id + " not found.");
+                    return new ProductNotFoundException("Book with id " + id + " not found.");
                 });
     }
 
